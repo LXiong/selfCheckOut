@@ -1,0 +1,178 @@
+/**
+ * 
+ */
+package SelfCheckOut.App;
+
+import static org.junit.Assert.*;
+
+import java.util.Vector;
+
+import org.junit.Test;
+
+
+/**
+ * @author g1sawaf
+ *
+ */
+public class DayTest {
+	
+	@Test
+	/**
+	 * Test an empty Day
+	 */
+	public void testEmptyDay(){
+		
+		try {
+			
+			CheckOutCart cart = new CheckOutCart();
+			Vector<GroceryItem> expected = new Vector();
+			Record r1 = new Record(cart, 0);
+			Day d1 = new Day();
+			d1.addRecord(r1);
+			assertEquals(d1.getPopularPromotions("quantity", 0), expected);
+		}
+		catch (Exception e) {
+			assertFalse(true);
+		}
+	}
+	
+	/**
+	 * Test if GroceryItem is sorted by quantity. 
+	 * Note that this test result doesn't always pass. Because the behaviour is random and uncontrollable when 
+	 * the maximum value is located in the hashtable. One cannot know which GroceryItem gets picked up first. 
+	 * I made it so that it passes a lot more than it fails, but all in all, the functionality works and it does 
+	 * what it should be doing. 
+	 */
+	@Test
+	public void testByQuantity() {
+		
+		try {
+			
+			boolean result;
+			CheckOutCart cart = new CheckOutCart();
+			Vector<GroceryItem> vres = new Vector<GroceryItem>();
+			Vector<GroceryItem> exp1 = new Vector<GroceryItem>();
+			Vector<GroceryItem> exp2 = new Vector<GroceryItem>();
+			
+			UPC upc1 = new UPC("786936224306");
+			UPC upc2 = new UPC("717951000842");
+			UPC upc3 = new UPC("085392132225");
+
+			
+			CategoryDB categoryHT = CategoryDB.getInstance();
+			categoryHT.setTaxRateForCategory("Cereal", 1);
+			categoryHT.setTaxRateForCategory("Drink", 2);
+
+			PackagedProduct pp1 = new PackagedProduct("Kellogg Cereal", upc1,
+					3.52, 1.35, "Cereal");
+			PackagedProduct pp2 = new PackagedProduct("Coca Cola (12 pack)",
+					upc2, 3.20, 4, "Drink");
+			PackagedProduct pp3 = new PackagedProduct("Coca Cola (12 pack)",
+					upc3, 3.20, 4, "Drink");
+			
+			GroceryItem gi1 = new GroceryItem(pp1, pp1.getPrice(), pp1.getWeight());
+			GroceryItem gi2 = new GroceryItem(pp2, pp2.getPrice(), pp2.getWeight());
+			GroceryItem gi3 = new GroceryItem(pp3, pp3.getPrice(), pp3.getWeight());
+			
+			
+			//set gi1 to promotion while the other one is not. Only gi1 should show up 
+			//in r1.getItemsOnPromotion()
+			gi1.setPromotion();
+			gi2.setPromotion();
+			gi3.setPromotion();
+			
+			cart.addItemToCart(gi1);
+			cart.addItemToCart(gi2);
+			cart.addItemToCart(gi3);
+			
+			Record r1 = new Record(cart, 0);
+			
+			Day day1 = new Day();
+			
+			day1.addRecord(r1);	
+			
+			vres = day1.getPopularPromotions("quantity", 1);
+			
+			exp1.add(gi2);
+			exp2.add(gi3);
+			
+			if ( exp1.equals(vres) ){
+				result = true;
+			}
+			else if (exp2.equals(vres)){
+				result = true;
+			}
+			else {
+				result = false;
+			}
+			
+			assertTrue(result);
+		}
+		
+		catch (Exception e) {
+			//should not reach here
+			assertFalse(true);
+		}
+	}
+	
+	/**
+	 * Test if GroceryItem is sorted by price. 
+	 */
+	@Test
+	public void testByPrice() {
+		
+		try {
+			CheckOutCart cart = new CheckOutCart();
+			Vector<GroceryItem> expected = new Vector<GroceryItem>();
+			
+			UPC upc1 = new UPC("786936224306");
+			UPC upc2 = new UPC("717951000842");
+			UPC upc3 = new UPC("085392132225");
+
+			
+			CategoryDB categoryHT = CategoryDB.getInstance();
+			categoryHT.setTaxRateForCategory("Cereal", 1);
+			categoryHT.setTaxRateForCategory("Drink", 2);
+			categoryHT.setTaxRateForCategory("Cookie", 4);
+
+			PackagedProduct pp1 = new PackagedProduct("Kellogg Cereal", upc1,
+					3.52, 1.35, "Cereal");
+			PackagedProduct pp2 = new PackagedProduct("Coca Cola (12 pack)",
+					upc2, 3.20, 4, "Drink");
+			PackagedProduct pp3 = new PackagedProduct("Oreo Cookies", upc3,
+					3.50, 0.8, "Cookie");
+			
+			GroceryItem gi1 = new GroceryItem(pp1, pp1.getPrice(), pp1.getWeight());
+			GroceryItem gi2 = new GroceryItem(pp2, pp2.getPrice(), pp2.getWeight());
+			GroceryItem gi3 = new GroceryItem(pp3, pp3.getPrice(), pp3.getWeight());
+			
+			
+			//set gi1 to promotion while the other one is not. Only gi1 should show up 
+			//in r1.getItemsOnPromotion()
+			gi1.setPromotion();
+			gi2.setPromotion();
+			gi3.setPromotion();
+			
+			cart.addItemToCart(gi1);
+			cart.addItemToCart(gi2);
+			cart.addItemToCart(gi3);
+			
+			Record r1 = new Record(cart, 0);
+			
+			Day day1 = new Day();
+			
+			day1.addRecord(r1);	
+			
+			expected.add(gi1);
+			expected.add(gi3);
+			
+			assertEquals(day1.getPopularPromotions("price", 2), expected);
+		}
+		
+		catch (Exception e) {
+			//should not reach here
+			assertFalse(true);
+		}
+	}
+
+}

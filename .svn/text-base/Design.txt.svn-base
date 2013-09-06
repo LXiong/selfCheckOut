@@ -1,0 +1,132 @@
+User Story 4: Reports Over Time
+
+The Reporter class was enhanced with a method called getRecordsByDate(),
+which takes two Java Calendar dates as input.
+The input is taken from the GUI, where the user selects two dates.
+The method then returns a vector or records in the specific time period.
+
+Initially, the story was assessed at 7 points; however, during sprint 4
+the estimation had to be more than doubled when realized how much work had
+to go in it for the GUI.
+
+After the re-assessment, the Reporter had to be enhanced with the
+processCalendar() method which parses an output string for the user in
+ReportsGUI and changes it back into a Java Calendar date.
+
+The Cal.java file was added to the GUI folder. Cal was written by a third
+party source, however it permits the use in our application (full license
+can be found in Cal.java)
+Cal was enhanced with setCallButton(), updateLabel() and a callButton attribute
+in order to connect it to ReportsGUI. Essentially, whenever a user selects
+a different day in the Calendar, the button on the ReportsGUI represents that
+change.
+
+ReportsGUI has a few methods and attributes handing time and date:
+it has a startDateButton and an endDateButton, pressing on which summons the
+Calendar. Once the Calendar is closed, the ReportsGUI calls a method in the 
+reporter to get all the reports between the new dates: this is implemented
+in startDateCalendar();
+
+Testing can be found in
+	- ReporterTest.java
+	- Additional testing was performed in the GUI, including corner cases such as
+		- testing last day of the months
+		- testing by selecting a day many years ago
+		- testing of 'today'
+		- testing of selection of products in future
+		- testing where end date is before start date
+		- testing where end date is start date
+		- testing 1-digit days and months
+---------------------------------------------------------------------------
+
+User Story 5: Names and Products
+Z you write this
+---------------------------------------------------------------------------
+
+Technical Debt 2: Testing Reporter Class:
+ReporterTest.java was added to the testsuite and tests all functions in Reporter.
+---------------------------------------------------------------------------
+
+Technical Debt 3: Dead and Redundant Code:
+
+As User Story 5: Names and Products was implemented, much of the code from
+User Story 2 became obsolete. Therefore, a METHOD NAME was eliminated from
+the Reporter Class.
+The Record's method getString() was also eliminated.
+
+The SelfCheckOutGUI class was split into SelfCheckOutGui and ReportsGUI.
+Hundreds of repetitive lines of code in the ReportsGui initialization method
+were take out into helpers and replaced by clean implementations.
+---------------------------------------------------------------------------
+
+User Story 6: Sorting
+
+By calling getGroceryInfo, we are given a vector of GroceryTableElements. GroceryTableElements
+contain information relevant to the GroceryItem which includes the product name, category,
+total price, tax and promotion. Our job here is to sort each field in both ascending and descending order. 
+
+It might seem intuitive to modify the comparator class, but having all those sorting requirements
+makes the task messy. So a method for each field has been created that takes a vector of grocerytableelements, 
+and an option field. The former specifies the items that require sorting, and the latter specifies ascending or descending. 
+
+Helper methods were made to retrieve the lowest string/double/boolean (starting with a), or highest string (starting with z) depending 
+on where it's called from, and what the option is. After returning the desired object, that object is placed properly in place, 
+and the helper method is called again until all elements in the list have been called. 
+
+Testing:
+A java test suite has been written to test the correctness of the program. 
+A new vector was manually made and manually sorted, and compared with the vector
+the sorting methods return. A true assertion of the two vectors imply that the method is working. 
+-customsorttest.java
+---------------------------------------------------------------------------
+
+User Story 10: ReportsGUI
+
+The 7 sorting buttons at the top were made to be different colors in order
+to permit the managers to intuitively sort the reports without having to read
+the text on the buttons. The buttons are further enhanced with arrows when
+pressed, with the downwards representing descending sorting and upwards arrow
+meaning ascending order.
+
+The Report occupy 60% of the sceensize and comprise the middle (and the most
+important) part of theReportsGUI. Percentage-based output was chosed for
+portability. Their output was written in HTML for cleanand fast output;
+the reports are a simple table with alternating rows of
+different colors in order to distinguish the values from each other more
+easily. The cells are padded and the text is centered for readability.
+
+
+The bottom part of the Reports is the selection pane - placed at the bottom
+since the managers agreed that it will be the least often accessed pane. The
+two date buttons bring up the calendar selection and update the reports pane
+once Calendar is closed. The Category is a simple drop down box that reacts to
+the user's choice and updates output.
+
+Testing:	- alpha testing perfomed by Philip and Zafer
+			- beta testing with friends, inluding people within computer science
+				and arts programs, and people with bad eyesight
+			- testing with corner cases such as:
+				- no reports
+				- reports don't fit on a page
+				- user multi-clicking on (different) sorting buttons
+				- user not closing calendar
+				- user attempting to sort on no reports
+				- user sorting after category selection
+				- user category selection after sorting
+				- selecting date after category choice
+				- selecting category after date choice
+---------------------------------------------------------------------------
+
+User story 11: Select from Category
+
+The CategoryDB was enhanced with the getCategories() method which returns
+a String array of all categories, along with a reserved "All Categories"
+at index 0. Dorothy agreed that "All Categories" is a good name for a category
+that will never appear in her store and approved to make it designate all
+categories. 
+
+Z you write the rest
+
+Testing can be found in
+	- CategoryDBTest.java
+	---------------------------------------------------------------------------

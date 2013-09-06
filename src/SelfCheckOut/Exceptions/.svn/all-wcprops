@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/Exceptions
+END
+AddWhileBaggingException.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Exceptions/AddWhileBaggingException.java
+END
+InvalidTaxException.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Exceptions/InvalidTaxException.java
+END
+InvalidBICException.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Exceptions/InvalidBICException.java
+END
+InvalidProductException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Exceptions/InvalidProductException.java
+END
+AddWhilePayingException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Exceptions/AddWhilePayingException.java
+END
+IncorrectStateException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Exceptions/IncorrectStateException.java
+END
+InvalidUPCException.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Exceptions/InvalidUPCException.java
+END
+InvalidEmployeeNumberException.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/Exceptions/InvalidEmployeeNumberException.java
+END

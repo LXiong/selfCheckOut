@@ -1,0 +1,131 @@
+Time & Date:		11:45, 22.11.12
+Members present:	Philip, Zafer, Kevin, Fahd, Sean
+
+Discussion:
+- discussed the manager view GUI in which the manager can view reports.
+	- Zafer drew out the initial diagram
+	- everyone made suggestions on how to improve it
+- assigned stories to be implemented (3, 4, 5, 6 & 9)
+
+Action Plan:
+- User Story 4: selection of records by time (Philip - due 25.11.12)
+- fix up the user stories to proper format (Philip - due 25.11.12)
+- User Story 10: create the GUI (without the functionality)
+									(Kevin & Fahd - due 25.11.12)
+- User story 6: create a new class with sorting algorithms (Sean - due 25.11.12)
+
+	- sort alphabetically
+	- sort by price
+	- sort by # of items
+	- sort by category
+- User Story 5: create a string/ArrayList representation for
+										the GroceryItems (Zafer - due 25.11.12)
+	- remember to include promotions
+--------------------------------------------------------------------------
+
+Time & Date:		13:00, 25.11.12
+Members present:	Philip, Zafer, Kevin, Sean
+
+Discussion:
+- discussed the specific columns in the GUI (which elements the managers
+								and the analysts want to see and compare)
+- decided to add total weight to the GUI
+- discussed the date input (decided to ignore time, just take date as parameter)
+- discussed details about sorting
+- decided to avoid ArrayLists and use Vectors for consistency
+
+Action Plan:
+- enhance the GUI with columns for properties (Kevin - due 27.11.12)
+- parse the Vector of GroceryTableElements (Kevin - due 27.11.12)
+- finish sorting (Sean - due 27.11.12)
+- parse the date from user input in the GUI (Philip - due 27.11.12)
+- enable searching for category via drop down menu (Philip - due 27.11.12)
+- Parse the records build a GroceryTableElement Vector (Zafer - due 27.11.12)
+--------------------------------------------------------------------------
+
+Time & Date:		15:34, 27.11.12
+Members present:	Philip, Zafer
+
+Discussion:
+- agree use of external libraries as a date picker
+- discuss the format of text output (contemplated labels, plain text, HTML)
+- contemplate implementing user story 8 (decided not to)
+
+Action Plan:
+- clean up the SelfCheckOUtGUI code (Philip - due 30.11.12)
+- fix the time & date bugs (Philip - due 30.11.12)
+- create the sorting methods (Zafer - due 30.11.12)
+--------------------------------------------------------------------------
+
+Time & Date:		19:15, 30.11.12
+Members present:	Philip, Zafer
+
+Discussion:
+- decided to modify the reportsGUI appearance (user story 10)
+- make sure everything so far is documented and tested
+
+Action Plan:
+- format the visual output for the reportsGUI (Philip - due 03.12.12)
+- connect the sorting methods to the buttons (Philip - due 02.12.12)
+- fix rounding bugs (Zafer - due 02.11.12)
+- wiki page and fork repo (Zafer - due 02.11.12)
+- document all changes and improve method docstrings (Zafer - due 02.12.12)
+--------------------------------------------------------------------------
+
+Time & Date:		20:40, 02.12.12
+Members present:	Philip, Zafer
+
+Discussion:
+- dicussed sorting by promotion, weight and tax
+- planned some refactoring of the ReportsGUI
+- discussed database expansion
+- discussed sorting in ascending and descending order
+
+Action Plan:
+- refactor reportsGUI (Philip - due 03.12.12)
+- expand the database (Philip - due 03.12.12)
+- sorting in ascending order (Zafer - due 03.12.12)
+--------------------------------------------------------------------------
+
+Time & Date:		13:30, 03.12.12
+Members present:	Philip, Zafer
+
+Discussion:
+- dicussed various bugs present
+- decided to make getReportsOverTime take category as a parameter
+- contemplating implementing User Story 12: Search for Product (decided
+													not to)
+
+Action Plan:
+- enable sorting and category to work together (Philip - due 04.12.12)
+- fix ascending order by weight bug (Zafer - due 04.12.12)
+- implement ascending order for name, category and promotion
+										(Zafer - due 04.12.12)
+- add buttons to represent ascending and descending orders
+										(Philip - due 04.12.12)
+- fix the database so that items are 'addable' (Philip - due 04.12.12)
+- burn down chart & velocity (Zafer - due 04.12.12)
+- fix bug where can't login more than once (Zafer - due 04.12.12)
+- fix auto-scrolling bug (Zafer - due 04.12.12)
+--------------------------------------------------------------------------
+
+
+Time & Date:		12:30, 04.12.12
+Members present:	Philip, Zafer
+
+Discussion:
+- discussed improvement to user stories to justify design decisions
+- discussed installation
+
+Action Plan:
+- justify the design decision in user stories (Zafer - due 05.12.12)
+- explain user story points (Philip - due 05.12.12)
+- upload the retrospective (Philip - due 05.12.12)
+- upload the burn down chart & velocity (Zafer - due 05.12.12)
+- create ascending sorting methods for text attributes (Zafer - due 05.12.12)
+- upload the pictures for buttons for sorting ascending for text
+														(Philip - due 05.12.12)
+- update the wiki page (Zafer - due 05.12.12)
+- create installation (Philip - due 05.12.12)
+- modify Tom Tyrome persona (Philip - due 05.12.12)
+--------------------------------------------------------------------------

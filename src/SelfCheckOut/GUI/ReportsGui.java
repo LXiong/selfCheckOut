@@ -1,0 +1,649 @@
+package SelfCheckOut.GUI;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.util.*;
+import SelfCheckOut.App.CategoryDB;
+import SelfCheckOut.App.CustomSorter;
+import SelfCheckOut.App.GroceryTableElement;
+import SelfCheckOut.App.Reporter;
+
+/**
+* ReportsGUI holds the controlsPane (for sorting reports), the reportsPane for
+* displaying the actual reports and the selectPane which allows the user
+* to narrow down their data domain.
+* The class operates closes with Reporter, Cal and CustomSorter.
+*/
+class ReportsGUI extends JPanel implements ActionListener {
+    	
+    /**
+    * Class serial version
+    * */
+    private static final long serialVersionUID = 1L;
+
+    /**
+    * Button for sorting by product name
+    */
+    protected JButton sortProduct;
+
+    /**
+    * Button for sorting by number of purchases
+    */
+    protected JButton sortNumPurchase;
+
+    /**
+    * Button for sorting by total price 
+    */
+    protected JButton sortTotalPrice;
+
+    /**
+    * Button for sorting by total tax
+    */
+    protected JButton sortTotalTax;
+
+    /**
+    * Button for sorting by category 
+    */
+    protected JButton sortCategory;
+
+    /**
+    * Button for sorting by weight
+    */
+    protected JButton sortWeight;
+
+    /**
+    * Button for sorting by promotion
+    */
+    protected JButton sortPromotion;
+
+    /**
+    * Text Area for the displaying the reports
+    */	
+    protected JTextPane reportsPane;
+
+    /**
+    * Button for summoning the Calendar and displaying the starting date
+    */	
+    protected JButton startDateButton;
+
+    /**
+    * Button for summoning the Calendar and displaying the starting date
+    */	
+    protected JButton endDateButton; 
+
+    /**
+    * Drop down list with the category options
+    */	
+    protected JComboBox categoryBox;
+
+    /**
+    * The reporter class, used for retrieving the reports from the
+    * TransactionManager
+    */
+    protected Reporter reporter;
+
+    /**
+     * dim stores the dimensions of the reportsPane (specifically the height,
+     * which is individual per user and comprises 60% of screen height
+     * and 100% of screen width
+     */
+    protected Dimension dim;
+    
+    /**
+    * cal is the Calendar belonging to the ReportsGUI
+    */
+    protected JFrame cal;
+    
+  	//toggle variables for action methods
+  	protected int toggleNumPurchases=0;
+  	protected int toggleTotPrice=0;
+  	protected int toggleTax=0;
+  	protected int toggleWeight=0;
+  	protected int toggleProdName=0;
+  	protected int toggleProdCategory=0;
+  	protected int togglePromotion=0;
+
+
+
+    /**
+    * Initialize the ReportsGui by setting up all appropriate labels,
+    * and buttons, positioning them and connecting up the action
+    * listeners.
+    */    
+    public ReportsGUI() {
+
+        setLayout(new BorderLayout());
+        reporter = new Reporter();
+        cal = null;
+
+        startDateButton = constructDateButton();
+
+        endDateButton = constructDateButton();
+        categoryBox = constructCategoryBox();
+
+    	sortProduct = constructButtonWithImage("name",
+    			"/images/name.png");
+    	sortCategory = constructButtonWithImage("category",
+    			"/images/category.png");
+    	sortNumPurchase = constructButtonWithImage("purchases",
+    			"/images/purchases.png");
+    	sortTotalPrice = constructButtonWithImage("price",
+    			"/images/price.png");
+    	sortTotalTax = constructButtonWithImage("tax",
+    			"/images/tax.png");
+    	sortWeight = constructButtonWithImage("weight",
+    			"/images/weight.png");
+    	sortPromotion = constructButtonWithImage("promotion",
+    			"/images/promotion.png");
+
+        // add sorting buttons to the GUI and align them
+        JPanel textControlsPane = alignControlsPane();
+        
+        // add the calendar and category selection to the GUI and align them
+        JPanel selectPane = alignSelectPane();
+
+        // create the reports area
+        JScrollPane areaScrollPane = constructReportsPane();
+
+        JPanel appPanel = new JPanel(new BorderLayout());
+        appPanel.setOpaque(false);
+
+        // lay out the panes in the GUI
+        appPanel.add(textControlsPane, BorderLayout.PAGE_START);
+        appPanel.add(areaScrollPane, BorderLayout.CENTER);
+        appPanel.add(selectPane, BorderLayout.PAGE_END);
+        add(appPanel, BorderLayout.PAGE_START);
+    }
+
+    /* 
+     * Initialize some decorative elements never accessed by the user:
+     * the labels whose values do not change: "from", "until", and "from 
+     * category"
+     * Add the selection elements to the selectPane and align them at
+     * the bottom of the page in a horizontal line
+     */
+    private JPanel alignSelectPane() {
+    	  	JLabel startLabel = constructLabel("from");
+    	    JLabel endLabel = constructLabel("until");
+    	    JLabel categoryLabel = constructLabel("from category:");
+    	    categoryLabel.setLabelFor(categoryBox);
+
+    		//Lay out the text controls and the labels
+    	    JPanel selectPane = new JPanel();
+    	    
+    	    selectPane.setOpaque(false);
+    	    GridBagLayout gridbag = new GridBagLayout();
+    	    GridBagConstraints c = new GridBagConstraints();
+
+    	    selectPane.setLayout(gridbag);
+    	    c.anchor = GridBagConstraints.CENTER;
+    	    
+    	    positionElement(1, 0, c);
+    	    selectPane.add(startLabel, c);
+
+    	    positionElement(2, 0, c);
+    	    selectPane.add(startDateButton, c);
+
+    	    positionElement(3, 0, c);
+    	    selectPane.add(endLabel, c);
+
+    	    positionElement(4, 0, c);
+    	    selectPane.add(endDateButton, c);
+
+    	    positionElement(5, 0, c);
+    	    selectPane.add(categoryLabel, c);
+
+    	    positionElement(6, 0, c);
+    	    selectPane.add(categoryBox, c);
+    	    
+    	    return selectPane;
+    }
+
+    /*
+     * Add the sorting buttons to the controlsPane and align them at the top
+     * of the page in a horizonal line
+     */
+    private JPanel alignControlsPane() {
+    	
+    	//Lay out the text controls and the labels
+        JPanel textControlsPane = new JPanel();
+        
+        textControlsPane.setOpaque(false);
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        textControlsPane.setLayout(gridbag);
+        c.anchor = GridBagConstraints.CENTER;
+
+        //Line 3: Sort buttons
+
+        positionElement(0, 0, c);
+        textControlsPane.add(sortProduct, c);
+        
+        positionElement(1, 0, c);
+        textControlsPane.add(sortCategory, c);
+
+        positionElement(2, 0, c);
+        textControlsPane.add(sortNumPurchase, c);
+
+        positionElement(3, 0, c);
+        textControlsPane.add(sortTotalPrice, c);
+
+        positionElement(4, 0, c);
+        textControlsPane.add(sortTotalTax, c);
+        
+        positionElement(5, 0, c);
+        textControlsPane.add(sortWeight, c);
+
+        positionElement(6, 0, c);
+        textControlsPane.add(sortPromotion, c);
+
+        return textControlsPane;
+        }
+
+    /* Return a button which will have the today's date and
+     * summon the Calendar on click. It is always initialized
+     * with today's date.
+     */
+    private JButton constructDateButton() {
+        Calendar now = Calendar.getInstance();
+    	int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH);
+        int date = now.get(Calendar.DATE);
+        String text = date + "/" + (month + 1) + "/" + year;
+        ImageIcon img = new ImageIcon(getClass().getResource("/images/date.png"));
+    	JButton dateButton = new JButton(img);
+    	dateButton.setText(text);
+    	dateButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        dateButton.setVerticalTextPosition(SwingConstants.CENTER);
+        dateButton.setBorder(null);
+        dateButton.addActionListener(new ActionListener() {
+        	@Override
+    		public void actionPerformed(ActionEvent evt) {
+        		startDateCalendar(evt);
+        	}
+        });
+        return dateButton;
+    }
+    /*
+     * Given the x and y positions and a GridBagConstraints variable
+     *, specify the position according to the input parameters.
+     */
+    private void positionElement(int x, int y, GridBagConstraints con) {
+    	//con.fill = GridBagConstraints.HORIZONTAL;
+        con.weightx = 1;
+        con.gridx = x;
+        con.gridy = y;
+    }
+
+    /*
+     * Return a JButton with the given image as its ImageIcon and add
+     * an ActionListener which will be activated if the button is
+     * pressed (called by its name)
+     */
+
+    private JButton constructButtonWithImage(String name, String image) {
+    	ImageIcon img = new ImageIcon(getClass().getResource(image));
+    	JButton button = new JButton(img);
+    	button.setFont(new Font("Century Gothic", Font.PLAIN, 22));
+    	button.setForeground(new Color(56, 56, 66));
+    	button.setText(name);
+        button.setActionCommand(name);
+        button.addActionListener(this);
+        button.setVerticalTextPosition(SwingConstants.CENTER);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setBorder(null);
+        return button;
+    }
+
+    /*
+     * Return a non-interactive Label which simply holds text
+     */
+    private JLabel constructLabel(String name) {
+    	JLabel label = new JLabel(name);
+    	label.setFont(new Font("Century Gothic", Font.BOLD, 20));
+    	label.setForeground(Color.white);
+    	label.setVerticalTextPosition(SwingConstants.BOTTOM);
+    	label.setHorizontalTextPosition(SwingConstants.CENTER);
+    	return label;
+    }
+
+    /*
+     * Return a JComboBox with all the Categories in the current database
+     * available with a drop-down list. Add an ActionListener which will
+     * respond anytime the user selects a category
+     */
+    private JComboBox constructCategoryBox() {
+        String[] catList = CategoryDB.getInstance().getCategories();
+        categoryBox = new JComboBox(catList);
+        ActionListener categoryUpdate = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Vector<GroceryTableElement> res = fetchReports();
+                updateOutput(res);
+            }
+        };
+        categoryBox.addActionListener(categoryUpdate);
+        return categoryBox;
+    }
+
+    /*
+     * Return a JScrollPane which holds the reports output in HTML format.
+     * This pane is in the center of the screen.
+     */
+    private JScrollPane constructReportsPane() {
+        reportsPane = new JTextPane();
+        reportsPane.setContentType("text/html");
+        reportsPane.setEditable(false);
+        reportsPane.setBackground(new Color(70, 70, 70));
+
+        //Add scroll to the text area
+        JScrollPane areaScrollPane = new JScrollPane(reportsPane);
+        areaScrollPane.setOpaque(false);
+        areaScrollPane.setVerticalScrollBarPolicy(
+                  ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        Toolkit toolkit =  Toolkit.getDefaultToolkit();
+        Dimension screen = toolkit.getScreenSize();
+        dim = new Dimension((int)screen.getWidth(),
+        		(int)(screen.getHeight()*0.6));
+        areaScrollPane.setPreferredSize(dim);
+        return areaScrollPane;
+    }
+
+    /*
+     * Create a new window with a Calendar. On close, update the reports
+     * output in the reports area.
+     */
+    private void startDateCalendar(ActionEvent evt) {
+    	
+    	if (cal != null) {
+    		//Window w = (Window)cal.getParent();
+    		cal.getToolkit().getSystemEventQueue().postEvent(new WindowEvent(cal, WindowEvent.WINDOW_CLOSING));
+    	}
+        cal = new JFrame("Cal");
+        cal.setBackground(new Color(70,70,70));
+        java.awt.Container c = cal.getContentPane();
+        c.setLayout(new FlowLayout());
+        Cal calendar = new Cal();
+        JButton button =(JButton)evt.getSource();
+
+        // set the Calendar's frame initial location based on which
+        // dateButton calls it
+        if (button == startDateButton) {
+            cal.setLocation(0, (int)(dim.getHeight() - 160));
+        }
+        else {
+            cal.setLocation(400, (int)(dim.getHeight() - 160));
+        }
+        calendar.setCallButton(button);
+        c.add(calendar);
+        cal.pack();
+        cal.setVisible(true);
+        
+        // update the reports whenever calendar is closed
+        cal.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                 Vector<GroceryTableElement> info = fetchReports();
+                 updateOutput(info);
+            }
+        });
+    }
+
+
+    /* 
+     * Given a Vector of GroceryTableElements, print the reports to the
+     * reportsPane in HTML format.
+     */
+    private void updateOutput(Vector<GroceryTableElement> tableList) {
+        String start = "<html><body style=\"font-family:century gothic;color:\"#383842\";font-size:20px;\"><table>";
+        String content = "";
+        Boolean odd = true;
+        String color;
+        for (GroceryTableElement element : tableList) {
+
+            // alternate colors
+        	if (odd) {
+        		color = "#D7E5EB";
+        	}
+        	else {
+        		color = "#D6DEFB";
+        	}
+
+            // add a new line of content
+            content += "<tr bgcolor = " + color + ">";
+            content += generateCell(element.getProductName(), true);
+            content += generateCell(element.getProductCategory(), false);
+            content += generateCell(element.printNumPurchases(), false);
+            content += generateCell(element.printTotalPrice(), false);
+            content += generateCell(element.printTotalTax(), false);
+            content += generateCell(element.printWeight(), false);
+            content += generateCell(element.printPromotion(), false);
+            content += "</tr>";
+            odd = !odd;
+        }
+
+        String end  = "</table></body></html>";
+        reportsPane.setText(start + content + end);
+        reportsPane.setCaretPosition(0);
+    }
+
+    /*
+     * return a String which in HTML places the passed in property in a cell,
+     * centers the text and adds padding
+     */
+    private String generateCell(String property, Boolean bold) {
+    	String style = "\"padding:15px;\">";
+    	if (bold) {
+    		style = "\"padding:15px; font-weight:bold;\">";
+    	}
+        String cell = "<td align = \"center\" width = 140px style=" + style + property + "</td>";
+        return cell;
+    }
+
+
+    /**
+    * Method that receives the ActionEvent when a button is pressed in the 
+    * GUI. It calls to the appropriate action in the system and
+    * shows the result of the action in the message text area.
+    * If an exception is raised, this is showed in the message text area
+    * starting with the word EXCEPTION.
+    * @param e ActionEvent captured when user presses a button in the GUI
+    */       
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String path = "";
+    	
+    	JButton button = (JButton)e.getSource();
+    	CustomSorter sorter = new CustomSorter();
+
+        // retrieve the Vector of all reports
+    	Vector<GroceryTableElement> unsorted = fetchReports();
+    	Vector<GroceryTableElement> sorted = null;
+
+    	// Sorting by Product Name
+        if ("name".equals(e.getActionCommand())){
+        	if (toggleProdName == 0) {
+	        	path = "/images/nameDescending.png";
+	        	sorted = sorter.sortByProducts(unsorted, 0);
+	        	toggleProdName = 1;
+        	}
+        	else {
+        		path = "/images/nameAscending.png";
+        		sorted = sorter.sortByProducts(unsorted, 1);
+        		toggleProdName = 0;
+        	}
+        	
+        // Sorting by Category
+        } else if ("category".equals(e.getActionCommand())){
+        	if (toggleProdCategory == 0) {
+	        	path = "/images/categoryDescending.png";
+	        	sorted = sorter.sortByCategory(unsorted, 0);
+	        	toggleProdCategory = 1;
+        	}
+        	else {
+        		path = "/images/categoryAscending.png";
+        		sorted = sorter.sortByCategory(unsorted, 1);
+        		toggleProdCategory = 0;
+        	}
+
+    	// Sorting by Number of Purchases
+        } else if ("purchases".equals(e.getActionCommand())){
+        	if (toggleNumPurchases == 0) {
+        		path = "/images/purchasesDescending.png";
+        		sorted = sorter.sortByPurchases(unsorted, 0);
+        		toggleNumPurchases = 1;
+        	}
+        	else {
+        		path = "/images/purchasesAscending.png";
+        		sorted = sorter.sortByPurchases(unsorted, 1);
+        		toggleNumPurchases = 0;
+        	}
+        	
+    			
+    	// Sorting by Total Price
+        } else if ("price".equals(e.getActionCommand())){
+        	if ( toggleTotPrice == 0) {
+        		path = "/images/priceDescending.png";
+        		sorted = sorter.sortByPrice(unsorted, 0);
+        		toggleTotPrice = 1;
+        	}
+        	else {
+        		path = "/images/priceAscending.png";
+        		sorted = sorter.sortByPrice(unsorted, 1);
+        		toggleTotPrice = 0;
+        	}
+    		
+    	// Sorting by Total Tax
+        } else if ("tax".equals(e.getActionCommand())){
+        	if ( toggleTax == 0) {
+            	path = "/images/taxDescending.png";
+        		sorted = sorter.sortByTax(unsorted, 0);
+        		toggleTax = 1;
+        	}
+        	else {
+            	path = "/images/taxAscending.png";
+        		sorted = sorter.sortByTax(unsorted, 1);
+        		toggleTax = 0;
+        	}
+    			
+    	// Sorting by Weight
+        } else if ("weight".equals(e.getActionCommand())){
+        	if ( toggleWeight == 0) {
+        		path = "/images/weightDescending.png";
+        		sorted = sorter.sortByWeight(unsorted, 0);
+        		toggleWeight = 1;
+        	}
+        	else {
+        		path = "/images/weightAscending.png";
+        		sorted = sorter.sortByWeight(unsorted, 1);
+        		toggleWeight = 0;
+        	}
+        // Sorting by Promotion
+        } else if ("promotion".equals(e.getActionCommand())){	
+        	if (togglePromotion == 0) {
+	        	path = "/images/promotionDescending.png";
+	        	sorted = sorter.sortByPromotion(unsorted, 1);
+	        	togglePromotion = 1;
+        	}
+        	else {
+        		path = "/images/promotionAscending.png";
+        		sorted = sorter.sortByPromotion(unsorted, 0);
+        		togglePromotion = 0;
+        	}
+        }
+        
+        // Get specific categories
+        if ("catList".equals(e.getActionCommand())){
+        	sorted = fetchReports();
+        }
+        // Deselect whichever previous button was selected before and
+        // select the one that was just pressed
+        else {
+            deselectAll();
+            selectButton(button, path);
+        }
+
+        // refresh the reports pane with the reports in the correct order
+        updateOutput(sorted);
+
+    }
+
+    /*
+     * change the button's image to the "selected" version
+     */
+    private void selectButton(JButton button, String path) {
+    	ImageIcon img = new ImageIcon(getClass().getResource(path));
+    	button.setIcon(img);
+    	button.setBorder(null);
+    }
+    
+    /*
+     * Return an unsorted Vector of GroceryTableElements based
+     * on the currently user-selected category, start and end dates
+     */
+    private Vector<GroceryTableElement> fetchReports() {
+    	String category = categoryBox.getSelectedItem().toString();
+    	deselectAll(); 
+    	return reporter.getReportsByCategory(category,
+    			startDateButton.getText(), endDateButton.getText());
+    }
+
+    /*
+     * return all button's images to their initial deselected state
+     */
+    private void deselectAll() {
+    	String path1 = "/images/name.png";
+    	String path2 = "/images/category.png";
+    	String path3 = "/images/purchases.png";
+    	String path4 = "/images/price.png";
+    	String path5 = "/images/tax.png";
+    	String path6 = "/images/weight.png";	
+    	String path7 = "/images/promotion.png";
+    	
+    	ImageIcon img1 = new ImageIcon(getClass().getResource(path1));
+    	ImageIcon img2 = new ImageIcon(getClass().getResource(path2));
+    	ImageIcon img3 = new ImageIcon(getClass().getResource(path3));
+    	ImageIcon img4 = new ImageIcon(getClass().getResource(path4));
+    	ImageIcon img5 = new ImageIcon(getClass().getResource(path5));
+    	ImageIcon img6 = new ImageIcon(getClass().getResource(path6));
+    	ImageIcon img7 = new ImageIcon(getClass().getResource(path7));
+    	
+    	sortProduct.setIcon(img1);
+    	sortProduct.setBorder(null);
+    	sortCategory.setIcon(img2);
+    	sortCategory.setBorder(null);
+    	sortNumPurchase.setIcon(img3);
+    	sortNumPurchase.setBorder(null);
+    	sortTotalPrice.setIcon(img4);
+    	sortTotalPrice.setBorder(null);
+    	sortTotalTax.setIcon(img5);
+    	sortTotalTax.setBorder(null);
+    	sortWeight.setIcon(img6);
+    	sortWeight.setBorder(null);
+    	sortPromotion.setIcon(img7);
+    	sortPromotion.setBorder(null);
+    }
+}

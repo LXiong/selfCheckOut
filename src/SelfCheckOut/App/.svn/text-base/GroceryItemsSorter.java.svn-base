@@ -1,0 +1,55 @@
+package SelfCheckOut.App;
+
+
+import java.util.ArrayList;
+
+/**
+ * 
+ * @author g0budnin (sean)
+ * 
+ * Takes the output of Reporter.getRecordsByDate(Calendar startDate, Calendar endDate)
+ * 
+ * This class takes an ArrayList of records, and goes through each record creating a new GroceryTableElement for each distinct GroceryItem.
+ * The GroceryTableElements are then put into an ArrayList and sorted based on which sorting method is called.
+ * 
+ * 
+ * 
+ * Methods:
+ * -------------------
+ * SortByPrice		-- sorts the GroceryTableElement(s) by their item price (excluding tax) from highest to lowest.
+ * SortByNumSold 	-- sorts the GroceryTableElement(s) by the number of sales for each item from highest to lowest.
+ * SortByCatagory	-- sorts the GroceryTableElement(s) by their category name alphabetically (A-Z).
+ * SortByItem 		-- sorts the GroceryTableElement(s) by their item name alphabetically (A-Z).
+ *
+ */
+
+public class GroceryItemsSorter {
+	
+	private ArrayList<GroceryTableElement> sortedList;
+	
+	
+	public GroceryItemsSorter(ArrayList<Record> recList){
+		//parse data, put into sortedList.
+		for(Record r : recList){
+			break;
+		}
+		sortedList = null; // dummy line to stop errors
+	}
+	
+	public ArrayList<GroceryTableElement> SortByPrice(){
+		return sortedList;
+	}
+	
+	public ArrayList<GroceryTableElement> SortByNumSold(){
+		return sortedList;
+	}
+	
+	public ArrayList<GroceryTableElement> SortByCatagory(){
+		return sortedList;
+	}
+	
+	public ArrayList<GroceryTableElement> SortByItem(){
+		return sortedList;
+	}
+
+}

@@ -1,0 +1,40 @@
+Appreciations:
+	- Assigning tasks and user stories (Philip)
+	- Clean, well-commented and test-driven code (Zafer)
+	- clean and readable wiki page with everything on it (Sean)
+	- excellent burn-down and velocity charts (Kevin)
+	- well-done technical debt and documentation (Fahd)
+--------------------------------------------------------------------------
+
+Puzzles:
+	- figuring out the formatting for the reports (especially numbers after
+											the decinam point) (Zafer)
+	- understanding customer's wishes and demands (everyone)
+	- testing the GUI code (Kevin)
+--------------------------------------------------------------------------
+
+Risks:
+
+	-grouping items by name eliminates the ability to see individual purchase
+				times and amounts; managers/analyst might later need that info
+	- choosing not to implement User Story 12: Search Field may prove to be
+		disadvantageous in the long term as product database grows much larger
+
+--------------------------------------------------------------------------
+
+Wishes:
+	- completion of assignments by deadline (Zafer)
+	- commited code to be documented and tested (Philip)
+	- more consistent group member attendance (Kevin)
+--------------------------------------------------------------------------
+
+Actions:
+	1. consistent attendance with everyone's input
+	2. committing complete and quality code (with documentation and testing),
+									and accepting responsibility for own code
+	3. prompt completion of tasks by deadline
+	4. more communication within the team
+	5. stronger analysis of the personas and what exactly they want from
+														the program
+	6. Address technical debts such as missing tests.
+--------------------------------------------------------------------------

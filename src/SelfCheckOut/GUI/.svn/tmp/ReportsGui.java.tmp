@@ -1,0 +1,496 @@
+package SelfCheckOut.GUI;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+import com.sun.xml.internal.ws.api.server.Container;
+import java.awt.event.ActionListener;
+import java.util.*;
+import SelfCheckOut.Devices.BaggingArea;
+import SelfCheckOut.Devices.BaggingAreaEvent;
+import SelfCheckOut.Devices.BaggingAreaListener;
+import SelfCheckOut.Devices.PaymentCollector;
+import SelfCheckOut.Exceptions.AddWhileBaggingException;
+import SelfCheckOut.Exceptions.AddWhilePayingException;
+import SelfCheckOut.Exceptions.IncorrectStateException;
+import SelfCheckOut.Exceptions.InvalidEmployeeNumberException;
+import SelfCheckOut.Exceptions.InvalidProductException;
+
+import SelfCheckOut.App.CategoryDB;
+import SelfCheckOut.App.CustomSorter;
+import SelfCheckOut.App.GroceryTableElement;
+import SelfCheckOut.App.Reporter;
+
+/**
+* This class contains the main method that will show the Graphical User
+* Interface of displaying reports.
+*
+*/
+class ReportsGUI extends JPanel implements ActionListener{
+
+/**
+* Button for sorting Product Name
+*/
+protected JButton sortProduct;
+
+/**
+* Button for sorting Number of Purchases
+*/
+protected JButton sortNumPurchase;
+
+/**
+* Button for sorting Total Price 
+*/
+protected JButton sortTotalPrice;
+
+/**
+* Button for sorting Total Tax
+*/
+protected JButton sortTotalTax;
+
+/**
+* Button for sorting Category 
+*/
+protected JButton sortCategory;
+
+/**
+* Button for sorting Weight
+*/
+protected JButton sortWeight;
+
+/**
+* Button for sorting Promotion
+*/
+protected JButton sortPromotion;
+
+/**
+* Text Area for the reports
+*/	
+protected JTextPane reportsPane;
+
+/**
+* Label for startDate
+*/	
+protected JButton startDateButton;
+
+/**
+* Label for endDate
+*/	
+protected JButton endDateButton; 
+
+/**
+* Text Field for category
+*/	
+protected JComboBox categoryBox;
+
+
+/*
+* The reporter class, used for retrieving
+* all the reports
+*/
+protected Reporter reporter;
+
+protected Dimension dim;
+
+protected JFrame cal;
+
+
+
+/**
+* Initialize the ReportsGui by setting up all appropriate labels,
+ * fields and buttons, positioning them and connecting up the action
+ * listeners.
+*/    
+public ReportsGUI() {
+
+    setLayout(new BorderLayout());
+    //setBackground(new Color(55, 55, 55));
+    //setOpaque(true);
+    // initialize the reporter class
+
+    reporter = new Reporter();
+
+    // start & end dates
+    startDateButton = createDateButton();
+    endDateButton = createDateButton();
+
+    //Category ComboBox
+    String[] catList = CategoryDB.getInstance().getCategories();
+    categoryBox = new JComboBox(catList);
+    categoryBox.setActionCommand("categoryList");
+    categoryBox.addActionListener(this);
+
+	// title buttons
+	sortProduct = constructButtonWithImage("name", "SelfCheckOut/GUI/Images/name.png");
+	sortCategory = constructButtonWithImage("category", "SelfCheckOut/GUI/Images/category.png");
+	sortNumPurchase = constructButtonWithImage("purchases", "SelfCheckOut/GUI/Images/purchases.png");
+	sortTotalPrice = constructButtonWithImage("price", "SelfCheckOut/GUI/Images/price.png");
+	sortTotalTax = constructButtonWithImage("tax","SelfCheckOut/GUI/Images/tax.png");
+	sortWeight = constructButtonWithImage("weight", "SelfCheckOut/GUI/Images/weight.png");
+	sortPromotion = constructButtonWithImage("promotion", "SelfCheckOut/GUI/Images/promotion.png");
+
+    JPanel textControlsPane = alignControlsPane();
+
+    reportsPane = new JTextPane();
+    reportsPane.setContentType("text/html");
+    reportsPane.setEditable(false);
+    reportsPane.setBackground(new Color(70, 70, 70));
+
+    //Add scroll to the text area
+    JScrollPane areaScrollPane = new JScrollPane(reportsPane);
+    areaScrollPane.setOpaque(false);
+    areaScrollPane.setVerticalScrollBarPolicy(
+              JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+    Dimension screen = toolkit.getScreenSize();
+    dim = new Dimension((int)screen.getWidth(), (int)(screen.getHeight()*0.6));
+    areaScrollPane.setPreferredSize(dim);
+    
+    // Add calendar and category selection to the select area
+    JPanel selectPane = alignSelectPane();
+
+    //Include all the controls in the application panel
+    JPanel appPanel = new JPanel(new BorderLayout());
+    appPanel.setOpaque(false);
+    appPanel.add(textControlsPane, BorderLayout.PAGE_START);
+    appPanel.add(areaScrollPane, BorderLayout.CENTER);
+    appPanel.add(selectPane, BorderLayout.PAGE_END);
+
+    add(appPanel, BorderLayout.PAGE_START);
+}
+
+private JPanel alignSelectPane() {
+	  	JLabel startLabel = constructLabel("from");
+	    JLabel endLabel = constructLabel("until");
+	    JLabel categoryLabel = constructLabel("from category");
+	    categoryLabel.setLabelFor(categoryBox);
+
+		//Lay out the text controls and the labels
+	    JPanel selectPane = new JPanel();
+	    
+	    //selectPane.setBackground(Color.GRAY);
+	    selectPane.setOpaque(false);
+	    GridBagLayout gridbag = new GridBagLayout();
+	    GridBagConstraints c = new GridBagConstraints();
+
+	    selectPane.setLayout(gridbag);
+	    c.anchor = GridBagConstraints.CENTER;
+	    
+	    positionElement(1, 0, c);
+	    selectPane.add(startLabel, c);
+
+	    positionElement(2, 0, c);
+	    selectPane.add(startDateButton, c);
+
+	    positionElement(3, 0, c);
+	    selectPane.add(endLabel, c);
+
+	    positionElement(4, 0, c);
+	    selectPane.add(endDateButton, c);
+
+	    positionElement(5, 0, c);
+	    selectPane.add(categoryLabel, c);
+
+	    positionElement(6, 0, c);
+	    selectPane.add(categoryBox, c);
+	    
+	    return selectPane;
+}
+
+/* 
+ * Initialize some decorative elements never accessed by the user:
+ * the labels whose values do not change: "from", "until", and "from 
+ * category"
+ * It then positions all elements present in the ReportsGUI and aligns
+ * them according to a grid
+ */
+private JPanel alignControlsPane() {
+	
+	//Lay out the text controls and the labels
+    JPanel textControlsPane = new JPanel();
+    
+    //textControlsPane.setBackground(Color.GRAY);
+    textControlsPane.setOpaque(false);
+    GridBagLayout gridbag = new GridBagLayout();
+    GridBagConstraints c = new GridBagConstraints();
+
+    textControlsPane.setLayout(gridbag);
+    c.anchor = GridBagConstraints.WEST;
+
+    //Line 3: Sort buttons
+
+    positionElement(0, 0, c);
+    textControlsPane.add(sortProduct, c);
+    
+    positionElement(1, 0, c);
+    textControlsPane.add(sortCategory, c);
+
+    positionElement(2, 0, c);
+    textControlsPane.add(sortNumPurchase, c);
+
+    positionElement(3, 0, c);
+    textControlsPane.add(sortTotalPrice, c);
+
+    positionElement(4, 0, c);
+    textControlsPane.add(sortTotalTax, c);
+    
+    positionElement(5, 0, c);
+    textControlsPane.add(sortWeight, c);
+
+    positionElement(6, 0, c);
+    textControlsPane.add(sortPromotion, c);
+
+    return textControlsPane;
+    }
+
+/* Return a button which will have the today's date and
+ * summon the Calendar on click. It is always initialized
+ * with today's date.
+ */
+private JButton createDateButton() {
+    Calendar now = Calendar.getInstance();
+	int year = now.get(Calendar.YEAR);
+    int month = now.get(Calendar.MONTH);
+    int date = now.get(Calendar.DATE);
+    String text = date + "/" + (month + 1) + "/" + year;
+	ImageIcon img = new ImageIcon("SelfCheckOut/GUI/Images/date.png");
+	JButton dateButton = new JButton(img);
+	dateButton.setText(text);
+	dateButton.setHorizontalTextPosition(JLabel.CENTER);
+    dateButton.setVerticalTextPosition(JLabel.CENTER);
+    dateButton.setBorder(null);
+    dateButton.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent evt) {
+    		startDateCalendar(evt);
+    	}
+    });
+    return dateButton;
+}
+/*
+ * Given the x and y positions and a GridBagConstraints variable
+ *, specify the position according to the input parameters.
+ */
+private void positionElement(int x, int y, GridBagConstraints con) {
+	//con.fill = GridBagConstraints.HORIZONTAL;
+    con.weightx = 1;
+    con.gridx = x;
+    con.gridy = y;
+}
+
+/*
+ * Create a new window with a Calendar. On close, update the reports
+ * output in the reports area.d
+ */
+private void startDateCalendar(ActionEvent evt) {
+	JFrame f = new JFrame("Cal");
+	f.setBackground(new Color(70,70,70));
+	java.awt.Container c = f.getContentPane();
+	c.setLayout(new FlowLayout());
+	Cal calendar = new Cal();
+	JButton button =(JButton)evt.getSource();
+	if (button == startDateButton) {
+		f.setLocation(0, (int)(dim.getHeight() - 160));
+	}
+	else {
+		f.setLocation(450, (int)(dim.getHeight() - 160));
+	}
+	calendar.setCallButton(button);
+	c.add(calendar);
+	f.pack();
+	f.setVisible(true);
+	
+	f.addWindowListener(new WindowAdapter() {
+		public void windowClosing(WindowEvent e) {
+			 Vector<GroceryTableElement> stuff = 
+				reporter.getGroceryInfo(startDateButton.getText(), 
+						 endDateButton.getText());
+			 updateOutput(stuff);
+		}
+	});
+}
+
+private JButton constructButtonWithImage(String name, String image) {
+	ImageIcon img = new ImageIcon(image);
+	JButton button = new JButton(img);
+	button.setBorder(null);
+    button.setVerticalTextPosition(AbstractButton.BOTTOM);
+    button.setHorizontalTextPosition(AbstractButton.CENTER);
+    button.setActionCommand(name);
+    button.addActionListener(this);
+    return button;
+}
+
+private JLabel constructLabel(String name) {
+	JLabel label = new JLabel(name);
+	label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+	label.setForeground(Color.white);
+	label.setVerticalTextPosition(AbstractButton.BOTTOM);
+	label.setHorizontalTextPosition(AbstractButton.CENTER);
+	return label;
+}
+
+
+/* 
+ * Print the report to the reportsPane
+ */
+private void updateOutput(Vector<GroceryTableElement> tableList) {
+    String start = "<html><body style=\"font-family:century gothic;color:\"#383842\";font-size:20px;\"><table>";
+    String content = "";
+    Boolean odd = true;
+    String color;
+    for (GroceryTableElement element : tableList) {
+    	if (odd) {
+    		color = "#D7E5EB";
+    	}
+    	else {
+    		color = "#D6DEFB";
+    	}
+        content += "<tr bgcolor = " + color + ">";
+        content += generateCell(element.getProductName());
+        content += generateCell(element.getProductCategory());
+        content += generateCell(element.printNumPurchases());
+        content += generateCell(element.printTotalPrice());
+        content += generateCell(element.printTotalTax());
+        content += generateCell(element.printWeight());
+        content += generateCell(element.printPromotion());
+        content += "</tr>";
+        odd = !odd;
+    }
+
+    String end  = "</table></body></html>";
+    reportsPane.setText(start + content + end);
+}
+
+private String generateCell(String property) {
+    String cell = "<td width = 140px style=\"padding:15px;\">" + property + "</td>";
+    return cell;
+}
+
+
+/**
+* Method that receives the ActionEvent when a button is pressed in the 
+* GUI. It calls to the appropriate action in the system and
+* shows the result of the action in the message text area.
+* If an exception is raised, this is showed in the message text area
+* starting with the word EXCEPTION.
+* @param e ActionEvent captured when user presses a button in the GUI
+*/       
+public void actionPerformed(ActionEvent e) {
+	//new ReportsGUI();
+	//Instantiate actions class
+    //Actions actions = new Actions();
+    String path = "";
+	
+	JButton button = (JButton)e.getSource();
+	CustomSorter sorter = new CustomSorter();
+	 Vector<GroceryTableElement> unsorted = 
+				reporter.getGroceryInfo(startDateButton.getText(), 
+						 endDateButton.getText());
+	 Vector<GroceryTableElement> sorted = null;
+	// Sorting by Product Name
+    if ("name".equals(e.getActionCommand())){
+    	path = "SelfCheckOut/GUI/Images/nameSelected.png";
+    	sorted = sorter.sortByProducts(unsorted);
+    	
+    // Sorting by Category
+    } else if ("category".equals(e.getActionCommand())){
+    	path = "SelfCheckOut/GUI/Images/categorySelected.png";
+    	sorted = sorter.sortByCategory(unsorted);
+
+	// Sorting by Number of Purchases
+    } else if ("purchases".equals(e.getActionCommand())){
+    	path = "SelfCheckOut/GUI/Images/purchasesSelected.png";
+    	sorted = sorter.sortByPurchases(unsorted, 0);
+			
+	// Sorting by Total Price
+    } else if ("price".equals(e.getActionCommand())){
+    	path = "SelfCheckOut/GUI/Images/priceSelected.png";
+		
+	// Sorting by Total Tax
+    } else if ("tax".equals(e.getActionCommand())){
+    	path = "SelfCheckOut/GUI/Images/taxSelected.png";
+		
+	// Sorting by Category
+    } else if ("weight".equals(e.getActionCommand())){
+    	path = "SelfCheckOut/GUI/Images/weightSelected.png";
+
+    // Sorting by Promotion
+    } else if ("promotion".equals(e.getActionCommand())){		
+    	path = "SelfCheckOut/GUI/Images/promotionSelected.png";
+    }
+    
+    // Get specific categories
+    else if ("categoryList".equals(e.getActionCommand())) {
+    	String category = categoryBox.getSelectedItem().toString();
+
+    }
+    deselectAll();
+    selectButton(button, path);
+    updateOutput(sorted);
+
+}
+
+private void selectButton(JButton button, String path) {
+	ImageIcon img = new ImageIcon(path);
+	button.setIcon(img);
+	button.setBorder(null);
+}
+
+private void deselectAll() {
+	String path1 = "SelfCheckOut/GUI/Images/name.png";
+	String path2 = "SelfCheckOut/GUI/Images/category.png";
+	String path3 = "SelfCheckOut/GUI/Images/purchases.png";
+	String path4 = "SelfCheckOut/GUI/Images/price.png";
+	String path5 = "SelfCheckOut/GUI/Images/tax.png";
+	String path6 = "SelfCheckOut/GUI/Images/weight.png";	
+	String path7 = "SelfCheckOut/GUI/Images/promotion.png";
+	
+	ImageIcon img1 = new ImageIcon(path1);
+	ImageIcon img2 = new ImageIcon(path2);
+	ImageIcon img3 = new ImageIcon(path3);
+	ImageIcon img4 = new ImageIcon(path4);
+	ImageIcon img5 = new ImageIcon(path5);
+	ImageIcon img6 = new ImageIcon(path6);
+	ImageIcon img7 = new ImageIcon(path7);
+	
+	sortProduct.setIcon(img1);
+	sortProduct.setBorder(null);
+	sortCategory.setIcon(img2);
+	sortCategory.setBorder(null);
+	sortNumPurchase.setIcon(img3);
+	sortNumPurchase.setBorder(null);
+	sortTotalPrice.setIcon(img4);
+	sortTotalPrice.setBorder(null);
+	sortTotalTax.setIcon(img5);
+	sortTotalTax.setBorder(null);
+	sortWeight.setIcon(img6);
+	sortWeight.setBorder(null);
+	sortPromotion.setIcon(img7);
+	sortPromotion.setBorder(null);
+}
+}

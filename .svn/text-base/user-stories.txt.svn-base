@@ -1,0 +1,202 @@
+Technical debt 1
+	-Wrap all the tests in a test suite.
+-----------------------------------
+
+Technical debt 2
+	- Test the reporter class
+	- Add ReporterTest to the suite
+-----------------------------------
+
+Technical debt 3
+	- Clean up tons of redundant code
+	in the SelfCheckOutGui
+	- Eliminate dead code in Record
+	and Reporter
+-----------------------------------
+
+Technical debt 4 <<----- shud this rly be debt? implemented in sprint4 technically
+	- modify login and password to
+	proper magic string format
+	(as opposed to hard-coding it)
+-----------------------------------
+
+User story 1: the GUI
+As a manager, I want to view the reports using the GUI, so that I don't
+have to print them to view it or necessarily write them to a file.
+
+Discussion: Dorothy is no programmer and requested that reports should
+			be accessible via simple clicking with the mouse; she further
+			highlighted that she's usually busy with other tasks;
+			Thus the GUI simplicity is key.
+
+Note: implemented in sprint 3
+Points: 5
+---------------------------------------------------------------------------
+
+User story 2: the Output
+As a manager, or marketing analyst, I want to be able to view the basic
+information about records so that I can see people's trends by their shopping
+carts.
+The information should include the record id, along with the price, the tax,
+the time, the payment method and the status.
+
+Discussion: The technologically progressive marketing analyst, Mr. Tyrome said
+			that therecord ID should be included too, for the sake of
+			simplifying of finding certain items later in the database.
+
+Note: implemented in sprint 3
+Points: 5
+---------------------------------------------------------------------------
+
+User story 3: Formatting & Styling
+As a manager, I want the reports to be easily readable, clearly presented and
+not have ridiculous decimal values so that I can do my work quickly and
+efficiently.
+	- the reports must be aligned
+	- the time should have same format anytime: eleven hours 9 minutes
+				should display as 11:09, not 11:9; any other zero formatting
+													errors must be fixed
+	- all prices and taxes must be rounded to 2 decimal places
+
+Discussion: Dorothy has pretty poor eyesight; furthermore, she refuses to wear
+			vision aid. Therefore clear big font is key. Other managers also
+			desire a presentable and an easy-to-read report along with
+			easy-to-find items. Tyrome further pointed out the ridicule of
+			having dozens of decimal places in prices and the annoying time
+			format.
+
+Note: implemented in sprint 3
+Points: 10
+---------------------------------------------------------------------------
+
+User story 4: Reports over Time
+As a manager, and especially as marketing analyst, I want to be able to
+view the reports over specific time periods so that.. //
+	- the user should be able to pick start and end date for reports
+	- the 'picking' should be available in the GUI
+
+Discussion: Marketing analyst, Tom said that the main reason for reports is
+			watching and finding trends, and trends are inevitably
+			related to time. The ability to view reports over specific
+			time periods is crucial for analysing the business performance
+			and performing forecasting.
+
+Note: implemented in sprint 4
+Points: 7 reasessed: 15
+---------------------------------------------------------------------------
+
+User story 5: Names & Promotions
+As a marketing analyst, I want to be able to view the specific products
+in the records, so that I can analyze the trends by products, as opposed to
+by customers and their shopping carts.
+	- the management team realized that the 'records' themselves are not
+												crucial for the reports
+	- 'by item' information is much more valuable
+
+Discussion: Manager Mohammed said that the name of the product is important
+			for tracking progress. Furthermore, reports are the only
+			way for judging a promotion's success, and Dorothy believes
+			that promotions are one of the best ways to get customer
+			to spend more money.
+
+Note: implemented in sprint 4
+Points: 5
+---------------------------------------------------------------------------
+
+User story 6: Sorting
+As a user, I want to be able to sort the report by category, quantity, time or
+alphabetically, so that I can have a clear organized view that would make it easier for me
+to spectate the reports and find trends. 
+
+Discussion: Both managers and the marketing analyst find it hard to
+			orient themselves amongst the records when they are sorted
+			temporarily. They push for the ability to sort the report
+			by different parameters, and the ability to sort by a
+			different parameter by a single click of a button.
+
+Note: implemented in sprint 4
+Points: 12
+---------------------------------------------------------------------------
+
+User story 7: Forecasting
+As a manager, I want to be able produce a simple forecast based on
+the given report, so that:
+	- I can predict projected revenue
+	- I can see projected quantities of # of items sold (especially on promotion)
+
+Discussion: Dorothy and one of the managers are interested in automating of
+			using the reports to forecast. Given that the main interest
+			is revenue and finding out of most popular items,
+			the forecasted report doesn't need to have detailed data
+			about the individual records, but rather the total amount
+			of revenue expected along with promotions. Dorothy is pushing
+			to keep this report simple and instantly readable, saying
+			that if she needs a more detailed report she'll put
+			the marketing analyst Tom to work.
+
+Note: not implemented
+Points: 12
+---------------------------------------------------------------------------
+
+User story 8: Graphs & Images
+As a manager or marketing analyst, I want to be able to see the reported data
+in the form of graphs and infographics, so that I can easily percieve the data
+relative to each other.
+	- pie chart for items on promotion
+	- line graph for revenue over time
+	- bar graph for revenue by category
+
+
+Discussion: Manager Mohammed is quite into all kinds of infographics. He
+			believes that visual representation will quickly speed up
+			the process and make the key data self-evident, eliminating
+			the necessity of long, and boring report inspection. He wants
+			the infographics to be abundant, colourful and bright.
+
+Note: not implemented
+Points: 20
+---------------------------------------------------------------------------
+
+User story 9: Privacy & Protection
+As a user with restricted access (manager or marketing analyst), I would like to prohibit
+unrestricted users from viewing the reports, so that I can protect my reports from being viewed 
+by the public. 
+
+Discussion: Managers are wary that anyone can access the all the reports,
+			thus enabling sharing information with their competitors.
+
+Note: implemented in sprint 4
+Points: 7
+---------------------------------------------------------------------------
+
+User story 10: Reports GUI //I think this form can be improved
+As a manager or marketing analyst, I want to be able to use the software quickly
+and with ease. This means that the sorting buttons should be easily distinguishable,
+the reports info has to be spaced out and readable.
+
+Discussion: Dorothy requested that the buttons should be of different colors, and
+			a some form of representation for the selected sorting method. She also
+			requested that the elements are big and well spaced out. Tom further
+			suggested having alternating lines of different colors for the reports.
+			During implementation process, Mohammed pointed out that the Calendar
+			popup position is block some of the controls so the Calendar should be moved
+			to a more intuitive position.
+Note: implemented in sprint 4.
+Points: 15
+---------------------------------------------------------------------------
+
+User story 11: Select from Category
+As a manager or a marketing analyst, I would like to specify items to be
+within a specific category, so that I can evaluate the traffic of the items sold in each
+specific category. 
+
+Discussion: Both managers and Tom agreed that a drop-down list with all current
+			categories, along with an "All Categories" special selection option
+			would be a sufficiently intuitive and simple implementation.
+
+Note: implemented in sprint 4.
+Points: 5
+---------------------------------------------------------------------------
+
+User story 12: Search by Report
+---------------------------------------------------------------------------

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/IntegrationTests
+END
+CartWithTwoItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/IntegrationTests/CartWithTwoItems.java
+END
+CartWithTwoPackagedItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/IntegrationTests/CartWithTwoPackagedItems.java
+END
+CartWithNoItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/IntegrationTests/CartWithNoItems.java
+END
+CartWithOneItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/IntegrationTests/CartWithOneItem.java
+END
+CartWithOnePackagedItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/IntegrationTests/CartWithOnePackagedItem.java
+END
+CartWithOnePackagedOneBulkItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/IntegrationTests/CartWithOnePackagedOneBulkItem.java
+END
+CartWithManyItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/IntegrationTests/CartWithManyItems.java
+END
+InstantiatingSelfCheckOut.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/IntegrationTests/InstantiatingSelfCheckOut.java
+END

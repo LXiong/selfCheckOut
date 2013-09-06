@@ -1,0 +1,245 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/csc301-2012-09/Whitehorse/!svn/ver/39/src/SelfCheckOut/App
+END
+Utils.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/Utils.java
+END
+TaxCollector.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/TaxCollector.java
+END
+TaxCollectorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/TaxCollectorTest.java
+END
+Code.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/Code.java
+END
+GroceryItemsSorter.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/GroceryItemsSorter.java
+END
+Day.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/Day.java
+END
+DayTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/DayTest.java
+END
+SelfCheckOutTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/SelfCheckOutTest.java
+END
+SelfCheckOut.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/SelfCheckOut.java
+END
+CheckOutCart.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/CheckOutCart.java
+END
+CheckOutCartTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/CheckOutCartTest.java
+END
+TransactionManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/TransactionManager.java
+END
+TransactionManagerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/TransactionManagerTest.java
+END
+CategoryDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/csc301-2012-09/Whitehorse/!svn/ver/39/src/SelfCheckOut/App/CategoryDB.java
+END
+CategoryDBTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/csc301-2012-09/Whitehorse/!svn/ver/17/src/SelfCheckOut/App/CategoryDBTest.java
+END
+GroceryItemTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/GroceryItemTest.java
+END
+GroceryItemCheckOutCartTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/GroceryItemCheckOutCartTest.java
+END
+GroceryItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/GroceryItem.java
+END
+ProductInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/ProductInfo.java
+END
+GroceryTableElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/csc301-2012-09/Whitehorse/!svn/ver/10/src/SelfCheckOut/App/GroceryTableElement.java
+END
+GroceryTableElementTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/csc301-2012-09/Whitehorse/!svn/ver/10/src/SelfCheckOut/App/GroceryTableElementTest.java
+END
+PackagedProductTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/PackagedProductTest.java
+END
+PackagedProduct.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/PackagedProduct.java
+END
+ReporterTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/csc301-2012-09/Whitehorse/!svn/ver/21/src/SelfCheckOut/App/ReporterTest.java
+END
+Reporter.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/csc301-2012-09/Whitehorse/!svn/ver/39/src/SelfCheckOut/App/Reporter.java
+END
+CustomSorter.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/csc301-2012-09/Whitehorse/!svn/ver/33/src/SelfCheckOut/App/CustomSorter.java
+END
+CustomSorterTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/csc301-2012-09/Whitehorse/!svn/ver/32/src/SelfCheckOut/App/CustomSorterTest.java
+END
+EmployeeList.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/EmployeeList.java
+END
+RecordTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/RecordTest.java
+END
+Record.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/Record.java
+END
+ProductDBTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/ProductDBTest.java
+END
+ProductDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/csc301-2012-09/Whitehorse/!svn/ver/19/src/SelfCheckOut/App/ProductDB.java
+END
+UPC.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/UPC.java
+END
+UPCTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/UPCTest.java
+END
+TestSuite.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/TestSuite.java
+END
+CategoryTaxTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/csc301-2012-09/Whitehorse/!svn/ver/2/src/SelfCheckOut/App/CategoryTaxTest.java
+END
+BIC.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/BIC.java
+END
+BICTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/BICTest.java
+END
+BulkProduct.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/csc301-2012-09/Whitehorse/!svn/ver/12/src/SelfCheckOut/App/BulkProduct.java
+END
+BulkProductTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/App/BulkProductTest.java
+END

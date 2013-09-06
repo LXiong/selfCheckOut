@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Devices
+END
+PaymentCollector.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Devices/PaymentCollector.java
+END
+BaggingArea.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Devices/BaggingArea.java
+END
+BaggingAreaEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Devices/BaggingAreaEvent.java
+END
+BaggingAreaListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/csc301-2012-09/Whitehorse/!svn/ver/1/src/SelfCheckOut/Devices/BaggingAreaListener.java
+END

@@ -1,0 +1,81 @@
+Decision about points:
+We are using pivotal tracker as our scrumboard which allows for 0, 1, 2 or 3
+points per task, with 0's being chores or bugs. This is our interpretation
+of them for the project:
+
+1 point:			Easy task, able to complete within 30 min
+2 points:			Medium task, able to complete within 60 min
+3 points:			Hard task, able to complete within 90 min
+0 points - bug:		A bug in the system; fixing it does not award any
+					points as it is not a benefit to the user directly,
+					since the user story which caused the bug already
+					has all the "usefuleness points"
+0 points - chore:	Tasks which do not provide direct usefuleness to the user,
+					such as technical debt and other aspects related
+					to the implementation or the documentation.
+
+Note:	tasks which take more than 90 min to complete are
+		broken down into smaller tasks.
+-------------------------------------------------------------------------------
+
+
+Example story break-down: User Story 4: Reports over Time
+Task breakdown:
+	- return all records between two given dates:			3 points
+	- parse the user input from the GUI:					3 points
+	- connect the methods:									1 point
+
+Total: 7 points
+
+However, as the story was being implemented, the task breakdown was modified:
+
+New task breakdown:
+	- return all records between two given dates:			3 points
+	- parse the user input from the GUI:					3 points
+	- connect the methods:									1 point
+	- create a visual calendar in the GUI:					3 points
+	- refactor to separate calendar and reportsGUI classes:	0 points
+	- parse GUI output to a Java calendar:					3 points
+	- prevent the calendar from crashing on bad input:		2 points
+
+Total: 15 points
+
+Note: These changes in assessment are visible through the burn down chart.
+-------------------------------------------------------------------------------
+
+
+Sprint planning:
+
+Sprint 3:
+User story 1: the GUI:										5 points
+User story 2: the Output:									5 points
+User story 3: Formatting & Styling:							10 points
+
+Total: 20 points
+
+Sprint 3 was meant to lay the groundwork for the next sprint. The initial GUI
+for the reports was created, alnog with the output in record form. However, as
+the Professor mentioned, there wasn't enough content generated in the sprint,
+therefore the drastic difference in points between sprint 3 and 4.
+-------------------------------------------------------------------------------
+
+Sprint 4:
+User story 4: Reports over Time:							15 points
+User story 5: Names & Promotions:							5 points
+User story 6: Sorting:										12 points
+User story 9: Privacy & Protection:							7 points
+User story 10: Reports GUI:									15 points
+User story 11: Select from Category:						5 points
+
+Total: 59 points
+
+Final release was meant to finish off the work started in sprint 3. Most
+importantly, the output of unhelpful records was modified to show the
+products bought. Other changes for the benefit of the user, such as sorting
+by all properties, choice of dates and category and a drastic change in the
+GUI were added. These user stories were priorities over others, such as
+forecasting since they form the dependincies for the further stories: for
+example, user story 4: reports over time is necessary for user story 7:
+forecasting, and both user stories 4 and 10 (reports GUI) are necessary for
+user story 8: graphs and images.
+-------------------------------------------------------------------------------
